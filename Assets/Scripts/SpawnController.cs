@@ -21,8 +21,14 @@ public class SpawnController : MonoBehaviour {
 			else
 				pulse = Time.time + 3;
 			
-			if (grannyCount != 1) {
-				Instantiate (granny, Vector3.zero, Quaternion.identity);
+			if (grannyCount != 3) {
+				if (grannyCount == 0) {
+					Instantiate (granny, Vector3.zero, Quaternion.identity);
+				} else if (grannyCount % 2 == 0) {
+					Instantiate (granny, Vector3.left, Quaternion.identity);
+				} else {
+					Instantiate (granny, Vector3.right, Quaternion.identity);
+				}
 				grannyCount++;
 			}
 		}
