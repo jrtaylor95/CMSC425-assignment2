@@ -23,11 +23,11 @@ public class SpawnController : MonoBehaviour {
 			
 			if (grannyCount != 3) {
 				if (grannyCount == 0) {
-					Instantiate (granny, Vector3.zero, Quaternion.identity);
+					Instantiate (granny, transform.position + Vector3.zero, Quaternion.identity);
 				} else if (grannyCount % 2 == 0) {
-					Instantiate (granny, Vector3.left, Quaternion.identity);
+					Instantiate (granny, transform.position + Vector3.left, Quaternion.identity);
 				} else {
-					Instantiate (granny, Vector3.right, Quaternion.identity);
+					Instantiate (granny, transform.position + Vector3.right, Quaternion.identity);
 				}
 				grannyCount++;
 			}

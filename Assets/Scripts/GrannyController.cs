@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GrannyController : MonoBehaviour {
 
-	private static int granniesLeft = 0;
+	private static int granniesLeft = 3;
 	private Rigidbody rb;
 	private Animator animator;
 	private GameObject bigVegas;
 	private Vector3 grannyVel;
+	private bool isFallen;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +19,12 @@ public class GrannyController : MonoBehaviour {
 		bigVegas = GameObject.Find ("Player");
 		animator = GetComponent<Animator> ();
 		grannyVel = Vector3.zero;
-		granniesLeft += 1;
+		isFallen = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (granniesLeft);
 		Vector3 toBigVegas;
 
 		Ray ray = new Ray(transform.position + Vector3.up, Vector3.down);
@@ -43,15 +45,17 @@ public class GrannyController : MonoBehaviour {
 			}
 			animator.SetFloat ("vel", grannyVel.magnitude);
 		} else {
+			if (!isFallen) {
+				isFallen = true;
+				granniesLeft--;
+				if (granniesLeft == 0) {
+					loadWinScene ();
+				}
+			}
 			//Give the granny one final push off the edge
 			rb.MovePosition (transform.position + (grannyVel * Time.deltaTime));
 			animator.SetBool ("grounded", false);
 			Destroy (gameObject, 5);
-
-			granniesLeft--;
-			if (granniesLeft == 0) {
-				loadWinScene ();
-			}
 		}
 	}
 
