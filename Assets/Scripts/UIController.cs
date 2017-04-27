@@ -7,4 +7,8 @@ public class UIController : MonoBehaviour {
 	public void LoadByScene(int index) {
 		SceneManager.LoadScene (index);
 	}
+
+	public void Quit() {
+		Application.Quit();
+	}
 }
